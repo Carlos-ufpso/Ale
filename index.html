@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>El mundo de Alejandra</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #ffd6ec, #d8c7ff);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* ESTRELLAS DE FONDO */
+        .estrella {
+            position: fixed;
+            color: white;
+            font-size: 25px;
+            animation: flotar 3s infinite ease-in-out;
+            z-index: -1;
+        }
+
+        .estrella:nth-child(1) {
+            top: 10%;
+            left: 10%;
+        }
+
+        .estrella:nth-child(2) {
+            top: 20%;
+            right: 15%;
+            animation-delay: 1s;
+        }
+
+        .estrella:nth-child(3) {
+            bottom: 15%;
+            left: 20%;
+            animation-delay: 2s;
+        }
+
+        .estrella:nth-child(4) {
+            bottom: 20%;
+            right: 10%;
+            animation-delay: 1.5s;
+        }
+
+        @keyframes flotar {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        /* TARJETA PRINCIPAL */
+        .contenedor {
+            width: 100%;
+            max-width: 650px;
+            background: white;
+            padding: 40px 30px;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18);
+        }
+
+        .icono {
+            font-size: 85px;
+            animation: saltar 2s infinite ease-in-out;
+        }
+
+        @keyframes saltar {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        h1 {
+            color: #8e44ad;
+            font-size: 42px;
+            margin: 15px 0 10px;
+        }
+
+        .subtitulo {
+            color: #666;
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        /* BOTONES */
+        button {
+            border: none;
+            padding: 15px 25px;
+            border-radius: 30px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            margin: 5px;
+        }
+
+        .boton-principal {
+            background: #8e44ad;
+            color: white;
+        }
+
+        .boton-principal:hover {
+            background: #732d91;
+            transform: scale(1.07);
+        }
+
+        .boton-secundario {
+            background: white;
+            color: #8e44ad;
+            border: 2px solid #8e44ad;
+        }
+
+        .boton-secundario:hover {
+            background: #f5e6fa;
+            transform: scale(1.05);
+        }
+
+        /* SECCIONES */
+        .oculto {
+            display: none;
+        }
+
+        .panel {
+            margin-top: 30px;
+            padding: 25px;
+            background: #fff7fc;
+            border-radius: 25px;
+            border: 2px solid #f3d5ed;
+            animation: aparecer 0.7s ease;
+        }
+
+        @keyframes aparecer {
+            from {
+                opacity: 0;
+                transform: translateY(25px) scale(0.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .panel h2 {
+            color: #e84393;
+            margin-bottom: 10px;
+        }
+
+        .panel p {
+            color: #555;
+            line-height: 1.6;
+            margin: 8px 0;
+        }
+
+        /* BARRA */
+        .barra {
+            width: 100%;
+            height: 25px;
+            background: #eee;
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+
+        .progreso {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #ff9ed2, #8e44ad);
+            border-radius: 20px;
+            transition: width 1.5s ease;
+        }
+
+        .resultado {
+            font-size: 18px;
+            font-weight: bold;
+            color: #e84393;
+        }
+
+        /* DIAGNÓSTICO */
+        .diagnostico {
+            min-height: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 18px;
+            color: #555;
+            margin: 15px 0;
+        }
+
+        /* REGALO */
+        .regalo {
+            font-size: 80px;
+            margin: 10px;
+        }
+
+        .mensaje-final {
+            margin-top: 20px;
+            padding: 20px;
+            background: #ffeef7;
+            border-radius: 20px;
+            color: #d63384;
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        .respuesta {
+            margin-top: 15px;
+            font-size: 18px;
+            color: #8e44ad;
+            min-height: 30px;
+            font-weight: bold;
+        }
+
+        .pie {
+            margin-top: 25px;
+            font-size: 13px;
+            color: #aaa;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 600px) {
+            .contenedor {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            .icono {
+                font-size: 70px;
+            }
+
+            button {
+                width: 100%;
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ESTRELLAS -->
+    <div class="estrella">✨</div>
+    <div class="estrella">⭐</div>
+    <div class="estrella">✨</div>
+    <div class="estrella">⭐</div>
+
+
+    <div class="contenedor">
+
+        <!-- INICIO -->
+        <div class="icono">
+            
+        </div>
+
+        <h1>¡Hola Ale!</h1>
+
+        <p class="subtitulo">
+            Has sido seleccionada oficialmente para participar
+            en el estudio científico sobre personas tamaño bolsillo.
+        </p>
+
+        <button id="iniciar" class="boton-principal">
+             Iniciar investigación
+        </button>
+
+
+        <!-- INVESTIGACIÓN -->
+        <div id="investigacion" class="panel oculto">
+
+            <h2>
+                 Analizando el tamaño...
+            </h2>
+
+            <p>
+                Por favor, no intentes estirarte durante el proceso.
+            </p>
+
+            <div class="barra">
+                <div id="progreso" class="progreso"></div>
+            </div>
+
+            <div id="resultado" class="resultado">
+                Procesando...
+            </div>
+
+            <br>
+
+            <button id="diagnostico" class="boton-secundario">
+                 Ver diagnóstico
+            </button>
+
+            <button id="regaloBtn" class="boton-principal">
+                 Abrir regalo
+            </button>
+
+            <div id="textoDiagnostico" class="diagnostico"></div>
+
+        </div>
+
+
+        <!-- REGALO -->
+        <div id="regalo" class="panel oculto">
+
+
+            <h2>
+                 ¡REGALO PARA ALE!
+            </h2>
+
+            <p>
+                Después de una exhaustiva investigación científica,
+                nuestros expertos decidieron darte algo especial.
+            </p>
+
+            <p>
+                Como eres tamaño bolsillo, conseguimos
+                una versión portátil especialmente para ti. 
+            </p>
+
+            <div class="mensaje-final">
+                 Bromita, te quiero cabezona 
+            </div>
+
+            <br>
+
+            <button id="perdonar" class="boton-principal">
+                 ¿Me perdonas?
+            </button>
+
+            <button id="molestar" class="boton-secundario">
+                 Volver a molestarme
+            </button>
+
+            <div id="respuesta" class="respuesta"></div>
+
+        </div>
+
+
+        <div class="pie">
+             Investigación completamente falsa.
+            Realizada por científicos igualmente falsos.
+        </div>
+
+    </div>
+
+
+    <script>
+
+        // ELEMENTOS
+        const iniciar = document.getElementById("iniciar");
+        const investigacion = document.getElementById("investigacion");
+        const progreso = document.getElementById("progreso");
+        const resultado = document.getElementById("resultado");
+
+        const diagnostico = document.getElementById("diagnostico");
+        const textoDiagnostico = document.getElementById("textoDiagnostico");
+
+        const regaloBtn = document.getElementById("regaloBtn");
+        const regalo = document.getElementById("regalo");
+
+        const perdonar = document.getElementById("perdonar");
+        const molestar = document.getElementById("molestar");
+        const respuesta = document.getElementById("respuesta");
+
+
+        // INICIAR INVESTIGACIÓN
+        iniciar.addEventListener("click", function () {
+
+            investigacion.classList.remove("oculto");
+
+            iniciar.style.display = "none";
+
+            setTimeout(function () {
+
+                progreso.style.width = "87%";
+
+                resultado.textContent =
+                    "87% ENANA — nivel peligrosamente adorable 😂";
+
+            }, 300);
+
+        });
+
+
+        // DIAGNÓSTICOS ALEATORIOS
+        const diagnosticos = [
+
+            " Diagnóstico: estatura compacta, personalidad gigante y peligro de enanidad elevado.",
+
+            " Resultado: 99% ternura, 1% tamaño y 100% capacidad para molestar.",
+
+            " Los científicos recomiendan llevar una escalera por si acaso. ",
+
+            " Se detectó una enana de alta calidad. Proceder con cariño.",
+
+            " Altura no encontrada. Probablemente está debajo de la mesa. ",
+
+            " Advertencia: enana detectada. Mantener una distancia segura. ",
+
+            " Tamaño pequeño, problemas grandes. Confirmado. "
+
+        ];
+
+
+        diagnostico.addEventListener("click", function () {
+
+            const numero =
+                Math.floor(Math.random() * diagnosticos.length);
+
+            textoDiagnostico.textContent =
+                diagnosticos[numero];
+
+        });
+
+
+        // MOSTRAR REGALO
+        regaloBtn.addEventListener("click", function () {
+
+            regalo.classList.remove("oculto");
+
+            regalo.scrollIntoView({
+                behavior: "smooth"
+            });
+
+        });
+
+
+        // BOTÓN PERDONAR
+        perdonar.addEventListener("click", function () {
+
+            const respuestas = [
+
+                " Sabía que no podías resistirte a mi encanto. Te quiero mucho, cabezona 💜",
+
+                " Gracias por perdonarme, pequeña criatura.",
+
+                "💜Sabía que en el fondo me querías JAJAJA.",
+
+                " Ven acá, cabezona. Era con cariño.",
+
+                " Prometo molestarte menos... probablemente."
+
+            ];
+
+            const numero =
+                Math.floor(Math.random() * respuestas.length);
+
+            respuesta.textContent =
+                respuestas[numero];
+
+        });
+
+
+        // BOTÓN PARA SEGUIR MOLESTANDO
+        molestar.addEventListener("click", function () {
+
+            const respuestas = [
+
+                "JAJAJA sabía que ibas a volver ",
+
+                "Otra vez tú... qué insistente la enana ",
+
+                "Bueno, pero ahora paga el impuesto de enana. 💸",
+
+                "Se reinició el bullying amistoso. ",
+
+                "¿Todavía sigues aquí? Qué pequeña pero persistente. ",
+
+                "La investigación ha confirmado que eres imposible de sacar de aquí. "
+
+            ];
+
+            const numero =
+                Math.floor(Math.random() * respuestas.length);
+
+            respuesta.textContent =
+                respuestas[numero];
+
+        });
+
+    </script>
+
+</body>
+</html>
